@@ -8,7 +8,8 @@ class CellAutomaton
 
 public:
   CellAutomaton();
-  bool isAlive();
+  virtual ~CellAutomaton();
+  virtual bool isAlive();
 };
 
 #endif // CELLAUTOMATON_H

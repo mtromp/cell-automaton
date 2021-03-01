@@ -5,6 +5,11 @@ CellAutomaton::CellAutomaton()
 
 }
 
+CellAutomaton::~CellAutomaton()
+{
+
+}
+
 bool CellAutomaton::isAlive()
 {
   return true;

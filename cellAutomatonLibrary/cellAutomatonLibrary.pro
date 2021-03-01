@@ -26,10 +26,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     cellautomaton.cpp \
+    conwayrule.cpp \
     mainwindow.cpp
 
 HEADERS += \
     cellautomaton.h \
+    conwayrule.h \
     mainwindow.h
 
 unix {

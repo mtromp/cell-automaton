@@ -15,7 +15,8 @@ CONFIG += testcase
 HEADERS +=  tst_cellautomatontestcase.h
 
 SOURCES +=  main.cpp  \
-  tst_cellautomaton.cpp
+  tst_cellautomaton.cpp \
+  tst_conwayrule.cpp
 
 INCLUDEPATH += $$PWD/../cellAutomatonLibrary
 LIBS += -L$$OUT_PWD/../cellAutomatonLibrary -lcellAutomatonLibrary
