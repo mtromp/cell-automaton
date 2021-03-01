@@ -1,4 +1,4 @@
-#include "tst_sudokutestcase.h"
+#include "tst_cellautomatontestcase.h"
 
 #include <gtest/gtest.h>
 

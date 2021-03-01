@@ -4,3 +4,8 @@ CellAutomaton::CellAutomaton()
 {
 
 }
+
+bool CellAutomaton::isAlive()
+{
+  return false;
+}

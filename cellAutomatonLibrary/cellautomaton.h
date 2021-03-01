@@ -2,12 +2,13 @@
 #define CELLAUTOMATON_H
 
 #include <QObject>
-#include <QWidget>
 
 class CellAutomaton
 {
+
 public:
   CellAutomaton();
+  bool isAlive();
 };
 
 #endif // CELLAUTOMATON_H

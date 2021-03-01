@@ -26,12 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     cellautomaton.cpp \
-    mainwindow.cpp  \
     mainwindow.cpp
 
 HEADERS += \
     cellautomaton.h \
-    mainwindow.h  \
     mainwindow.h
 
 unix {

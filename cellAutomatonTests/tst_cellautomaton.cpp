@@ -13,3 +13,7 @@ protected:
   CellAutomaton cell;
 };
 
+TEST_F(CellAutomatonTest, CellIsNotAlive)
+{
+  EXPECT_TRUE(cell.isAlive());
+}
