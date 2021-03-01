@@ -7,5 +7,5 @@ CellAutomaton::CellAutomaton()
 
 bool CellAutomaton::isAlive()
 {
-  return false;
+  return true;
 }
