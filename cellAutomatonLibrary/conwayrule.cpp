@@ -2,12 +2,10 @@
 
 ConwayRule::ConwayRule()
 {
-
 }
 
 ConwayRule::~ConwayRule()
 {
-
 }
 
 bool ConwayRule::CalculateNextState(std::list<CellAutomaton*> neighbors, bool currentState)
