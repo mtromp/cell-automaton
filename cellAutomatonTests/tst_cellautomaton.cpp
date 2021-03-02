@@ -7,7 +7,7 @@ using namespace testing;
 class CellAutomatonTest: public Test
 {
 protected:
-  CellAutomatonTest() : cell(){}
+  CellAutomatonTest() {}
   ~CellAutomatonTest() {}
 
   CellAutomaton cell;
