@@ -14,7 +14,7 @@ public:
   MOCK_METHOD0(isAlive, bool());
 };
 
-TEST(ConwayRule, CalculatesNextStateWhenAll3NeighborsIsAlive)
+TEST(ConwayRule, CalculatesNextStateAliveWhenAll3NeighborsIsAlive)
 {
   MockCellAutomaton mockCellAutomaton1,mockCellAutomaton2,mockCellAutomaton3;
   EXPECT_CALL(mockCellAutomaton1, isAlive()).WillOnce(Return(true));
@@ -24,5 +24,5 @@ TEST(ConwayRule, CalculatesNextStateWhenAll3NeighborsIsAlive)
   std::list<CellAutomaton*> theNeighbors = {&mockCellAutomaton1,&mockCellAutomaton2,&mockCellAutomaton3};
   ConwayRule theRule;
 
-  EXPECT_TRUE(theRule.CalculateNextState(theNeighbors));
+  EXPECT_TRUE(theRule.CalculateNextState(theNeighbors, false));
 }

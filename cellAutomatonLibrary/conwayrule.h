@@ -11,7 +11,7 @@ public:
   ConwayRule();
   virtual ~ConwayRule();
 
-  virtual bool CalculateNextState(std::list<CellAutomaton*> neighbors);
+  virtual bool CalculateNextState(std::list<CellAutomaton*> neighbors, bool currentState);
 };
 
 #endif // CONWAYRULE_H
