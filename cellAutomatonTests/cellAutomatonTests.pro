@@ -12,8 +12,6 @@ CONFIG -= app_bundle
 CONFIG += thread
 CONFIG += testcase
 
-HEADERS +=  tst_cellautomatontestcase.h
-
 SOURCES +=  main.cpp  \
   tst_cellautomaton.cpp \
   tst_conwayrule.cpp
