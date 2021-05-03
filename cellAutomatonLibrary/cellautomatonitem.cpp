@@ -25,6 +25,9 @@ void CellAutomatonItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*
 
   painter->setPen(QPen(QColor(56, 165, 211), 1));
   painter->drawRect(0, 0, 10, 10);
+}
 
-
+CellAutomaton* CellAutomatonItem::getCell()
+{
+  return cell;
 }

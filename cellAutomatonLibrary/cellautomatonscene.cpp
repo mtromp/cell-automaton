@@ -8,6 +8,7 @@ CellAutomatonScene::CellAutomatonScene(QObject* parent) : QGraphicsScene(parent)
   this->setSceneRect(0, 0, 400, 400);
 
   this->createCells();
+  this->setAllNeighborLists();
 }
 
 CellAutomatonScene::~CellAutomatonScene()
@@ -38,5 +39,86 @@ void CellAutomatonScene::createCells()
       xposition = xposition + 10;
     }
   }
+}
 
+void CellAutomatonScene::setAllNeighborLists()
+{
+  QTransform theTransform;
+
+  // make a loop that goes through the 40x40 matrix and calculates the neighbors for each cell
+  // special cases for x or y == 0 or 390.
+  int xposition = 0;
+  int xNeighborPosition;
+  int yposition = 0;
+  int yNeighborPosition;
+  CellAutomatonItem* cellItem;
+  CellAutomaton* theCell;
+  CellAutomatonItem* neighborItem;
+   for (unsigned int cellNumber = 1; cellNumber <= 1600; cellNumber++)
+  {
+
+    cellItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xposition,yposition,theTransform));
+    theCell = cellItem->getCell();
+    std::list<CellAutomaton*>* theNeighbors = new std::list<CellAutomaton*>;
+
+    //left neighbor
+    xNeighborPosition = xposition - 10;
+    yNeighborPosition = yposition;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //upper left neighbor
+    yNeighborPosition = yposition - 10;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //above neighbor
+    xNeighborPosition = xposition;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //upper right neighbor
+    xNeighborPosition = xposition + 10;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //right neighbor
+    yNeighborPosition = yposition;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //lower right neighbor
+    yNeighborPosition = yposition + 10;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //below neighbor
+    xNeighborPosition = xposition;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+    //lower left neighbor
+    xNeighborPosition = xposition - 10;
+    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    {
+      neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
+      theNeighbors->push_back(neighborItem->getCell());
+    }
+
+    theCell->setNeighborList(theNeighbors);
+  }
 }

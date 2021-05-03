@@ -12,6 +12,7 @@ public:
 
 private:
   void createCells();
+  void setAllNeighborLists();
 };
 
 #endif // CELLAUTOMATONSCENE_H

@@ -16,6 +16,8 @@ public:
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
              QWidget *widget);
 
+  CellAutomaton* getCell();
+
 private:
   CellAutomaton* cell;
 };
