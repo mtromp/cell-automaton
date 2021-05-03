@@ -25,12 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    automatongridview.cpp \
     cellautomaton.cpp \
+    cellautomatonitem.cpp \
+    cellautomatonscene.cpp \
+    cellautomatontoolbar.cpp \
     conwayrule.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    automatongridview.h \
     cellautomaton.h \
+    cellautomatonitem.h \
+    cellautomatonscene.h \
+    cellautomatontoolbar.h \
     conwayrule.h \
     mainwindow.h
 
