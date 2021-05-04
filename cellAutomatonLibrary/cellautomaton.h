@@ -16,6 +16,8 @@ public:
   void setNeighborList(std::list<CellAutomaton*>* neighbors);
   void calculateNextState();
   void updateCurrentState();
+
+  void toggleState();
 private:
   bool currentState = false;
   bool nextState = false;

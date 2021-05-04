@@ -3,6 +3,9 @@
 #include "cellautomaton.h"
 #include "cellautomatonitem.h"
 
+#include <QGraphicsSceneMouseEvent>
+#include <QTransform>
+
 CellAutomatonScene::CellAutomatonScene(QObject* parent) : QGraphicsScene(parent)
 {
   this->setSceneRect(0, 0, 400, 400);
@@ -13,7 +16,18 @@ CellAutomatonScene::CellAutomatonScene(QObject* parent) : QGraphicsScene(parent)
 
 CellAutomatonScene::~CellAutomatonScene()
 {
+}
 
+void CellAutomatonScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    QPointF position = event->scenePos();
+    QGraphicsItem* selectedItem = itemAt(position, QTransform());
+    CellAutomatonItem* mySelection = dynamic_cast<CellAutomatonItem*>(selectedItem);
+    if (mySelection != nullptr)
+    {
+        mySelection->handleMouseEvent();
+        this->update(0, 0, 400, 400);
+    }
 }
 
 void CellAutomatonScene::createCells()

@@ -17,6 +17,7 @@ public:
              QWidget *widget);
 
   CellAutomaton* getCell();
+  void handleMouseEvent();
 
 private:
   CellAutomaton* cell;

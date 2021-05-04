@@ -5,7 +5,6 @@
 CellAutomatonItem::CellAutomatonItem(CellAutomaton* theCell, QGraphicsItem* parent) : QGraphicsItem(parent)
                                                                                     , cell(theCell)
 {
-
 }
 
 CellAutomatonItem::~CellAutomatonItem()
@@ -25,9 +24,21 @@ void CellAutomatonItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*
 
   painter->setPen(QPen(QColor(56, 165, 211), 1));
   painter->drawRect(0, 0, 10, 10);
+  if (this->cell->isAlive())
+  {
+    painter->fillRect(1, 1, 9, 9, QColor(0, 0, 0));
+  } else {
+    painter->fillRect(1, 1, 9, 9, QColor(114, 213, 175));
+  }
+
 }
 
 CellAutomaton* CellAutomatonItem::getCell()
 {
   return cell;
+}
+
+void CellAutomatonItem::handleMouseEvent()
+{
+  this->cell->toggleState();
 }

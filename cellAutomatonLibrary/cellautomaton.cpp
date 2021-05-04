@@ -37,3 +37,8 @@ void CellAutomaton::updateCurrentState()
 {
   this->currentState = this->nextState;
 }
+
+void CellAutomaton::toggleState()
+{
+  this->currentState = !this->currentState;
+}
