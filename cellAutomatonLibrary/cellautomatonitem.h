@@ -19,6 +19,9 @@ public:
   CellAutomaton* getCell();
   void handleMouseEvent();
 
+  void calculateNextState();
+  void updateCurrentState();
+
 private:
   CellAutomaton* cell;
 };

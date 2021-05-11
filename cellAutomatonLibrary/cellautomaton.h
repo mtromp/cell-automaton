@@ -14,10 +14,10 @@ public:
   virtual bool isAlive();
   void setRule(ConwayRule* rule);
   void setNeighborList(std::list<CellAutomaton*>* neighbors);
-  void calculateNextState();
-  void updateCurrentState();
 
   void toggleState();
+  void calculateNextState();
+  void updateCurrentState();
 private:
   bool currentState = false;
   bool nextState = false;

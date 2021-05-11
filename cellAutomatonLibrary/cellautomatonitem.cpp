@@ -42,3 +42,12 @@ void CellAutomatonItem::handleMouseEvent()
 {
   this->cell->toggleState();
 }
+
+void CellAutomatonItem::calculateNextState()
+{
+  this->cell->calculateNextState();
+}
+void CellAutomatonItem::updateCurrentState()
+{
+  this->cell->updateCurrentState();
+}

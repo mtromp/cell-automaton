@@ -2,6 +2,7 @@
 
 #include "cellautomaton.h"
 #include "cellautomatonitem.h"
+#include "conwayrule.h"
 
 #include <QGraphicsSceneMouseEvent>
 #include <QTransform>
@@ -30,19 +31,28 @@ void CellAutomatonScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
     }
 }
 
+void CellAutomatonScene::handleNextClicked()
+{
+  calculateNext();
+  displayNext();
+}
+
 void CellAutomatonScene::createCells()
 {
+  ConwayRule* theRule = new ConwayRule();
   int xposition = 0; //Dimensions::Margin
   int yposition = 0; //Dimensions::Margin if there is an offset into the scene.
 
   for (unsigned int cellNumber = 1; cellNumber <= 1600; cellNumber++)
   {
     CellAutomaton* theCell = new CellAutomaton();
+    theCell->setRule(theRule);
     CellAutomatonItem* cellItem = new CellAutomatonItem(theCell);
     cellItem->setPos(xposition, yposition);
     this->addItem(cellItem);
 
-    //update xposition and ypositioh for a 40x40 grid
+
+    //update xposition and yposition for a 40x40 grid
     if ( cellNumber % 40 == 0 )
     {
       xposition = 0; //or Dimension::margin
@@ -68,7 +78,7 @@ void CellAutomatonScene::setAllNeighborLists()
   CellAutomatonItem* cellItem;
   CellAutomaton* theCell;
   CellAutomatonItem* neighborItem;
-   for (unsigned int cellNumber = 1; cellNumber <= 1600; cellNumber++)
+  for (unsigned int cellNumber = 1; cellNumber <= 1600; cellNumber++)
   {
 
     cellItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xposition,yposition,theTransform));
@@ -78,61 +88,124 @@ void CellAutomatonScene::setAllNeighborLists()
     //left neighbor
     xNeighborPosition = xposition - 10;
     yNeighborPosition = yposition;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //upper left neighbor
     yNeighborPosition = yposition - 10;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //above neighbor
     xNeighborPosition = xposition;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //upper right neighbor
     xNeighborPosition = xposition + 10;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //right neighbor
     yNeighborPosition = yposition;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //lower right neighbor
     yNeighborPosition = yposition + 10;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //below neighbor
     xNeighborPosition = xposition;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
     //lower left neighbor
     xNeighborPosition = xposition - 10;
-    if ((xNeighborPosition > 0 && xNeighborPosition < 400) && (yNeighborPosition > 0 && yNeighborPosition < 400))
+    if ((xNeighborPosition >= 0 && xNeighborPosition < 400) && (yNeighborPosition >= 0 && yNeighborPosition < 400))
     {
       neighborItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xNeighborPosition,yNeighborPosition,theTransform));
       theNeighbors->push_back(neighborItem->getCell());
     }
 
     theCell->setNeighborList(theNeighbors);
+
+    //update xposition and yposition for a 40x40 grid
+    if ( cellNumber % 40 == 0 )
+    {
+      xposition = 0; //or Dimension::margin
+      yposition = yposition + 10;
+    }
+    else
+    {
+      xposition = xposition + 10;
+    }
+
   }
+}
+
+void CellAutomatonScene::calculateNext()
+{
+  QTransform theTransform;
+
+  int xposition = 0;
+  int yposition = 0;
+  CellAutomatonItem* cellItem;
+
+  for (unsigned int cellNumber = 1; cellNumber <= 1600; cellNumber++)
+  {
+    cellItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xposition,yposition,theTransform));
+    cellItem->calculateNextState();
+    //update xposition and yposition for a 40x40 grid
+    if ( cellNumber % 40 == 0 )
+    {
+      xposition = 0; //or Dimension::margin
+      yposition = yposition + 10;
+    }
+    else
+    {
+      xposition = xposition + 10;
+    }
+  }
+}
+void CellAutomatonScene::displayNext()
+{
+  QTransform theTransform;
+
+  int xposition = 0;
+  int yposition = 0;
+  CellAutomatonItem* cellItem;
+
+  for (unsigned int cellNumber = 1; cellNumber <= 1600; cellNumber++)
+  {
+    cellItem = dynamic_cast<CellAutomatonItem*>(this->itemAt(xposition,yposition,theTransform));
+    cellItem->updateCurrentState();
+    //update xposition and yposition for a 40x40 grid
+    if ( cellNumber % 40 == 0 )
+    {
+      xposition = 0; //or Dimension::margin
+      yposition = yposition + 10;
+    }
+    else
+    {
+      xposition = xposition + 10;
+    }
+  }
+  //call to refresh display???
+  this->update(0, 0, 400, 400);
 }

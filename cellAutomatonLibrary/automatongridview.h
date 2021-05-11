@@ -7,8 +7,9 @@ class AutomatonGridView : public QGraphicsView
 {
    Q_OBJECT
 public:
-  AutomatonGridView(QWidget* parent = nullptr);
+  AutomatonGridView(QGraphicsScene* theScene, QWidget* parent = nullptr);
   virtual ~AutomatonGridView();
+
 };
 
 #endif // AUTOMATONGRIDVIEW_H
